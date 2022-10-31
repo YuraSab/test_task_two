@@ -1,6 +1,7 @@
 .main{
     padding: 0;
     margin: 80px 300px;
+    border: 4px green solid;
 }
 
 .isntInput{
