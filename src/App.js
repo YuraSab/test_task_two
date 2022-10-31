@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import Posts from "./components/Posts/Posts";
+import {postService} from "./service/post-service";
+import Pagination from "./Elements/Pagination";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+
+    const [posts, setPosts] = useState([]);
+    const [page, setPage] = useState(1);
+    const pService = postService;
+
+    useEffect(() => {
+        getPosts(page);
+    }, [page]);
+
+    const getPosts = async (page) => {
+        let post = await pService.getPostsPerPage(page);
+        setPosts(post);
+    }
+
+
+    return (
+
+        <div>
+            <Posts posts={posts}/>
+            <Pagination
+                setPage = {setPage}
+                page = {page}
+
+            />
+        </div>
+    );
+};
 
 export default App;
