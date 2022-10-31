@@ -5,6 +5,7 @@ import Pagination from "./Elements/Pagination/Pagination";
 import styles from "./App.module.css";
 import {useSearchParams} from "react-router-dom";
 import SearchInput from "./Elements/SearchInput/SearchInput";
+import SearchedPosts from "./components/SearchedPosts/SearchedPosts";
 
 const App = () => {
 
@@ -23,14 +24,9 @@ const App = () => {
         let post = await pService.getPostsPerPage(page);
         setPosts(post);
     }
+    
+    let filter = searchParams.get("filter");
 
-
-    // const filteredValue = posts.filter((post) => {
-    //     let filter = searchParams.get("filter");
-    //     if (!filter) return true;
-    //     let title = post.title.toLowerCase();
-    //     return title.includes(filter.toLowerCase());
-    // });
 
     return (
 
@@ -40,19 +36,29 @@ const App = () => {
                 setSearchParams={setSearchParams}
             />
 
-            <div className={styles.isntInput}>
-
-                <Posts
-                    posts={posts}
-                    // filteredValue={filteredValue}
-                    searchParams = {searchParams}
-                />
-                <Pagination
-                    setPage = {setPage}
-                    page = {page}
-
-
-                />
+            <div>
+                {
+                    filter ? (
+                        <div>
+                            <SearchedPosts
+                                posts={posts}
+                                searchParams = {searchParams}
+                            />
+                        </div>
+                    ) :(
+                        <div className={styles.isntInput}>
+                            <Posts
+                                posts={posts}
+                                // filteredValue={filteredValue}
+                                searchParams = {searchParams}
+                            />
+                            <Pagination
+                                setPage = {setPage}
+                                page = {page}
+                            />
+                        </div>
+                    )
+                }
             </div>
 
         </div>

@@ -1,0 +1,20 @@
+.main{
+    padding: 20px;
+    height: 75px;
+    background: darkgrey;
+    border: 4px black dashed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.inputSearch{
+    font-size: 20px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.inputSearch:hover{
+    box-shadow: 8px 8px 2px 1px black;
+}
