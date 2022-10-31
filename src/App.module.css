@@ -1,0 +1,10 @@
+.main{
+    padding: 0;
+    margin: 80px 300px;
+}
+
+.isntInput{
+    min-height: 75vh;
+    background: lightgreen;
+    padding: 75px 150px;
+}

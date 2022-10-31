@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {postService} from "../service/post-service";
-
+import {postService} from "../../service/post-service";
+import styles from "./Pagination.module.css";
 
 
 const Pagination = ({setPage, page}) => {
@@ -28,7 +28,7 @@ const Pagination = ({setPage, page}) => {
 
         listOfPageLinks.push(
             <div
-                className={active ? 'active' : 'not_active'}
+                className={active ? styles.active : styles.not_active}
                 key={i}
                 onClick={() => setPage(i)}
             >
@@ -38,7 +38,7 @@ const Pagination = ({setPage, page}) => {
     }
 
     return (
-        <div>
+        <div className={styles.main}>
             {
                 listOfPageLinks
             }
