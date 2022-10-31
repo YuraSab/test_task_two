@@ -6,12 +6,14 @@ import styles from "./App.module.css";
 import {useSearchParams} from "react-router-dom";
 import SearchInput from "./Elements/SearchInput/SearchInput";
 import SearchedPosts from "./components/SearchedPosts/SearchedPosts";
+import SubmitAlarm from "./components/SubmitAlarm/SubmitAlarm";
 
 const App = () => {
 
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [submitted, setSubmitted] = useState(false);
 
     const pService = postService;
 
@@ -27,13 +29,28 @@ const App = () => {
 
     let filter = searchParams.get("filter");
 
+    const onSubmitSearch = (e) => {
+        e.preventDefault();
+        setSubmitted(prevState => !prevState);
+        localStorage.clear();
+        localStorage.setItem('searchKey', `${filter}`);
+        setSearchParams("");
+    }
+
 
     return (
 
         <div className={styles.main}>
 
+
+            {
+                submitted ? <SubmitAlarm setSubmitted={setSubmitted}/> : null
+            }
+
+
             <SearchInput
                 setSearchParams={setSearchParams}
+                onSubmitSearch={onSubmitSearch}
             />
 
             <div>
@@ -42,19 +59,19 @@ const App = () => {
                         <div className={styles.isInput}>
                             <SearchedPosts
                                 posts={posts}
-                                searchParams = {searchParams}
+                                searchParams={searchParams}
                             />
                         </div>
-                    ) :(
+                    ) : (
                         <div className={styles.isntInput}>
                             <Posts
                                 posts={posts}
                                 // filteredValue={filteredValue}
-                                searchParams = {searchParams}
+                                searchParams={searchParams}
                             />
                             <Pagination
-                                setPage = {setPage}
-                                page = {page}
+                                setPage={setPage}
+                                page={page}
                             />
                         </div>
                     )
