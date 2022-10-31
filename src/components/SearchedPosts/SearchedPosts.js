@@ -1,12 +1,12 @@
 import React from 'react';
 import SearchedPost from "../SearchedPost/SearchedPost";
-
+import styles from "./SearchedPosts.module.css";
 
 const SearchedPosts = ({posts, searchParams}) => {
 
 
     return (
-        <div>
+        <div className={styles.main}>
             {
                 posts
                     .filter((post) => {

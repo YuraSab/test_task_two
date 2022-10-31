@@ -24,7 +24,7 @@ const App = () => {
         let post = await pService.getPostsPerPage(page);
         setPosts(post);
     }
-    
+
     let filter = searchParams.get("filter");
 
 
@@ -39,7 +39,7 @@ const App = () => {
             <div>
                 {
                     filter ? (
-                        <div>
+                        <div className={styles.isInput}>
                             <SearchedPosts
                                 posts={posts}
                                 searchParams = {searchParams}

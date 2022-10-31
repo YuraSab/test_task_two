@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from "./SearchedPost.module.css";
 
 const SearchedPost = ({item}) => {
     return (
-        <div>
+        <div className={styles.main}>
             {item.title}
         </div>
     );
